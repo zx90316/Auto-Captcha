@@ -69,7 +69,7 @@ We may update this Privacy Policy from time to time. We will notify users of any
 
 ## Contact
 
-If you have questions about this Privacy Policy, please open an issue on our [GitHub repository](https://github.com/YOUR_USERNAME/Auto-Captcha).
+If you have questions about this Privacy Policy, please open an issue on our [GitHub repository](https://github.com/zx90316/Auto-Captcha).
 
 ---
 
