@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Captcha 設定</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 標題區 -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔐</span>
+                <h1>Auto-Captcha 設定</h1>
+            </div>
+        </header>
+
+        <!-- 標籤頁導航 -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="api">API 設定</button>
+            <button class="tab" data-tab="rules">網站規則</button>
+            <button class="tab" data-tab="general">一般設定</button>
+        </nav>
+
+        <!-- API 設定頁 -->
+        <section class="tab-content active" id="tab-api">
+            <div class="card">
+                <h2 class="card-title">選擇 API 類型</h2>
+                <div class="api-types">
+                    <label class="api-type">
+                        <input type="radio" name="apiType" value="openai">
+                        <div class="api-type-content">
+                            <span class="api-icon">🤖</span>
+                            <span class="api-name">OpenAI</span>
+                            <span class="api-desc">ChatGPT / GPT-4 Vision</span>
+                        </div>
+                    </label>
+                    <label class="api-type">
+                        <input type="radio" name="apiType" value="gemini">
+                        <div class="api-type-content">
+                            <span class="api-icon">✨</span>
+                            <span class="api-name">Gemini</span>
+                            <span class="api-desc">Google AI</span>
+                        </div>
+                    </label>
+                    <label class="api-type">
+                        <input type="radio" name="apiType" value="ollama">
+                        <div class="api-type-content">
+                            <span class="api-icon">🦙</span>
+                            <span class="api-name">Ollama</span>
+                            <span class="api-desc">本地部署</span>
+                        </div>
+                    </label>
+                    <label class="api-type">
+                        <input type="radio" name="apiType" value="lmstudio">
+                        <div class="api-type-content">
+                            <span class="api-icon">🖥️</span>
+                            <span class="api-name">LM Studio</span>
+                            <span class="api-desc">本地部署</span>
+                        </div>
+                    </label>
+                    <label class="api-type">
+                        <input type="radio" name="apiType" value="custom">
+                        <div class="api-type-content">
+                            <span class="api-icon">⚙️</span>
+                            <span class="api-name">自訂</span>
+                            <span class="api-desc">自訂 API</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- OpenAI 設定 -->
+            <div class="card api-config" id="config-openai" style="display: none;">
+                <h2 class="card-title">OpenAI 設定</h2>
+                <div class="form-group">
+                    <label for="openai-apiKey">API Key</label>
+                    <input type="password" id="openai-apiKey" placeholder="sk-...">
+                    <small>從 <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI 平台</a> 取得</small>
+                </div>
+                <div class="form-group">
+                    <label for="openai-endpoint">API 端點</label>
+                    <input type="text" id="openai-endpoint" placeholder="https://api.openai.com/v1/chat/completions">
+                </div>
+                <div class="form-group">
+                    <label for="openai-model">模型</label>
+                    <div class="model-select-row">
+                        <select id="openai-model">
+                            <option value="gpt-4o-mini">GPT-4o Mini (推薦)</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                            <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        </select>
+                        <button type="button" class="btn btn-small btn-outline" id="btnLoadOpenaiModels">
+                            🔄 載入模型
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini 設定 -->
+            <div class="card api-config" id="config-gemini" style="display: none;">
+                <h2 class="card-title">Gemini 設定</h2>
+                <div class="form-group">
+                    <label for="gemini-apiKey">API Key</label>
+                    <input type="password" id="gemini-apiKey" placeholder="AIza...">
+                    <small>從 <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                        取得</small>
+                </div>
+                <div class="form-group">
+                    <label for="gemini-endpoint">API 端點</label>
+                    <input type="text" id="gemini-endpoint"
+                        placeholder="https://generativelanguage.googleapis.com/v1beta/models">
+                </div>
+                <div class="form-group">
+                    <label for="gemini-model">模型</label>
+                    <div class="model-select-row">
+                        <select id="gemini-model">
+                            <option value="gemini-1.5-flash">Gemini 1.5 Flash (推薦)</option>
+                            <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                            <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                        </select>
+                        <button type="button" class="btn btn-small btn-outline" id="btnLoadGeminiModels">
+                            🔄 載入模型
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ollama 設定 -->
+            <div class="card api-config" id="config-ollama" style="display: none;">
+                <h2 class="card-title">Ollama 設定</h2>
+                <div class="form-group">
+                    <label for="ollama-endpoint">API 端點</label>
+                    <div class="endpoint-row">
+                        <input type="text" id="ollama-endpoint" placeholder="http://localhost:11434">
+                        <button type="button" class="btn btn-small btn-outline" id="btnLoadOllamaModels">
+                            🔄 載入模型
+                        </button>
+                    </div>
+                    <small>輸入 Ollama 服務地址後點擊「載入模型」</small>
+                </div>
+                <div class="form-group">
+                    <label for="ollama-model">模型</label>
+                    <select id="ollama-model">
+                        <option value="">-- 請先載入模型列表 --</option>
+                    </select>
+                    <small>確保已安裝支援視覺的模型，如 llava、bakllava、llama3.2-vision</small>
+                </div>
+            </div>
+
+            <!-- LM Studio 設定 -->
+            <div class="card api-config" id="config-lmstudio" style="display: none;">
+                <h2 class="card-title">LM Studio 設定</h2>
+                <div class="form-group">
+                    <label for="lmstudio-endpoint">API 端點</label>
+                    <div class="endpoint-row">
+                        <input type="text" id="lmstudio-endpoint" placeholder="http://localhost:1234/v1">
+                        <button type="button" class="btn btn-small btn-outline" id="btnLoadLmstudioModels">
+                            🔄 載入模型
+                        </button>
+                    </div>
+                    <small>輸入 LM Studio 服務地址後點擊「載入模型」</small>
+                </div>
+                <div class="form-group">
+                    <label for="lmstudio-model">模型</label>
+                    <select id="lmstudio-model">
+                        <option value="">-- 請先載入模型列表 --</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 自訂 API 設定 -->
+            <div class="card api-config" id="config-custom" style="display: none;">
+                <h2 class="card-title">自訂 API 設定</h2>
+                <div class="form-group">
+                    <label for="custom-endpoint">API 端點</label>
+                    <input type="text" id="custom-endpoint" placeholder="https://your-api.com/v1/...">
+                </div>
+                <div class="form-group">
+                    <label for="custom-apiKey">API Key (選填)</label>
+                    <input type="password" id="custom-apiKey" placeholder="your-api-key">
+                </div>
+                <div class="form-group">
+                    <label for="custom-model">模型名稱</label>
+                    <input type="text" id="custom-model" placeholder="model-name">
+                </div>
+                <div class="form-group">
+                    <label for="custom-requestFormat">請求格式</label>
+                    <select id="custom-requestFormat">
+                        <option value="openai">OpenAI 相容格式</option>
+                        <option value="ollama">Ollama 格式</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 測試按鈕 -->
+            <div class="card">
+                <div class="button-row">
+                    <button class="btn btn-secondary" id="btnTest">
+                        <span>🔗</span> 測試連線
+                    </button>
+                    <button class="btn btn-primary" id="btnSaveApi">
+                        <span>💾</span> 儲存設定
+                    </button>
+                </div>
+                <div class="test-result" id="testResult" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- 網站規則頁 -->
+        <section class="tab-content" id="tab-rules">
+            <div class="card">
+                <h2 class="card-title">已儲存的網站規則</h2>
+                <p class="card-desc">這些規則用於手動指定驗證碼的位置</p>
+                <div class="rules-list" id="rulesList">
+                    <div class="empty-state">
+                        <span class="empty-icon">📋</span>
+                        <p>尚無任何規則</p>
+                        <small>在網頁上使用手動選擇功能來新增規則</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 一般設定頁 -->
+        <section class="tab-content" id="tab-general">
+            <div class="card">
+                <h2 class="card-title">偵測與填入</h2>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="autoDetect">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">自動偵測驗證碼</span>
+                    </label>
+                    <small>頁面載入時自動掃描驗證碼</small>
+                </div>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="autoFill">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">自動填入識別結果</span>
+                    </label>
+                    <small>識別成功後自動填入輸入框</small>
+                </div>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="autoRecognize">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">偵測到驗證碼時自動識別</span>
+                    </label>
+                    <small>頁面載入且偵測到驗證碼後，自動進行識別並填入</small>
+                </div>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="showRefreshButton">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">顯示重新識別按鈕</span>
+                    </label>
+                    <small>在驗證碼輸入框旁顯示重新識別按鈕</small>
+                </div>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="showNotifications">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">顯示通知</span>
+                    </label>
+                    <small>識別完成後顯示通知訊息</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">進階選項</h2>
+                <div class="form-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="debugMode">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">除錯模式</span>
+                    </label>
+                    <small>在控制台輸出詳細日誌</small>
+                </div>
+                <div class="button-row">
+                    <button class="btn btn-secondary" id="btnSaveGeneral">
+                        <span>💾</span> 儲存設定
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部資訊 -->
+        <footer class="footer">
+            <p>Auto-Captcha v1.0.0</p>
+            <p>自動驗證碼識別擴充功能</p>
+        </footer>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+/* Content Script 樣式 */
+
+/* 通知動畫 */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* 偵測到的驗證碼圖片標記 */
+[data-auto-captcha-image="true"] {
+  position: relative;
+}
+
+[data-auto-captcha-image="true"]::after {
+  content: '🔍';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 12px;
+  background: #667eea;
+  border-radius: 50%;
+  padding: 2px;
+  z-index: 999999;
+}
+
+/* 偵測到的驗證碼輸入框標記 */
+[data-auto-captcha-input="true"] {
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* 選擇器覆蓋層 */
+#auto-captcha-selector-overlay {
+  pointer-events: none;
+}
+
+/* 選擇器提示框 */
+#auto-captcha-selector-tooltip {
+  user-select: none;
+}
+
+/* 通知 */
+#auto-captcha-notification {
+  user-select: none;
+  cursor: default;
+}

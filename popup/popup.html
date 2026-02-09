@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto-Captcha</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 標題區 -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🔐</span>
+        <h1>Auto-Captcha</h1>
+      </div>
+      <span class="version">v1.0</span>
+    </header>
+
+    <!-- 狀態區 -->
+    <section class="status-section">
+      <div class="status-card" id="statusCard">
+        <div class="status-icon" id="statusIcon">🔍</div>
+        <div class="status-text">
+          <div class="status-title" id="statusTitle">正在偵測...</div>
+          <div class="status-desc" id="statusDesc">檢查頁面中的驗證碼</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主要操作按鈕 -->
+    <section class="action-section">
+      <button class="btn btn-primary" id="btnRecognize" disabled>
+        <span class="btn-icon">🤖</span>
+        <span class="btn-text">識別驗證碼</span>
+      </button>
+      
+      <button class="btn btn-secondary" id="btnRefresh">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">重新偵測</span>
+      </button>
+    </section>
+
+    <!-- 手動選擇區 -->
+    <section class="manual-section">
+      <div class="section-title">
+        <span>📌 手動選擇</span>
+        <small>若自動偵測失敗</small>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-outline" id="btnSelectImage">
+          <span class="btn-icon">🖼️</span>
+          <span class="btn-text">選擇圖片</span>
+        </button>
+        <button class="btn btn-outline" id="btnSelectInput">
+          <span class="btn-icon">✏️</span>
+          <span class="btn-text">選擇輸入框</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 規則狀態 -->
+    <section class="rule-section" id="ruleSection" style="display: none;">
+      <div class="rule-card">
+        <div class="rule-info">
+          <span class="rule-icon">📋</span>
+          <span class="rule-text">已有此網站的規則</span>
+        </div>
+        <button class="btn btn-small btn-danger" id="btnDeleteRule">刪除</button>
+      </div>
+    </section>
+
+    <!-- 底部連結 -->
+    <footer class="footer">
+      <a href="#" id="btnSettings" class="footer-link">
+        <span>⚙️</span> 設定
+      </a>
+      <span class="divider">|</span>
+      <a href="#" id="btnHelp" class="footer-link">
+        <span>❓</span> 說明
+      </a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
