@@ -36,19 +36,17 @@
 1. 前往 [OpenAI API Keys](https://platform.openai.com/api-keys)
 2. 建立 API Key
 3. 在擴充功能設定中填入 API Key
-4. 推薦使用 `gpt-4o-mini` 模型
 
 #### Gemini (Google AI)
 1. 前往 [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. 建立 API Key
 3. 在擴充功能設定中填入 API Key
-4. 推薦使用 `gemini-1.5-flash` 模型
 
 ### 本地 API
 
 #### Ollama
 1. 安裝 [Ollama](https://ollama.ai/)
-2. 下載支援視覺的模型：`ollama pull llava`
+2. 下載支援視覺的模型：`ollama pull glm-ocr:latest`
 3. 設定 CORS 允許擴充功能存取：
    ```powershell
    $env:OLLAMA_ORIGINS="chrome-extension://*"

@@ -30,7 +30,7 @@ const DEFAULT_API_CONFIG = {
     },
     ollama: {
         endpoint: 'http://localhost:11434',
-        model: 'llava'
+        model: 'glm-ocr:latest'
     },
     lmstudio: {
         endpoint: 'http://localhost:1234/v1',

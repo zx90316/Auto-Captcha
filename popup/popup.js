@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      */
     function openHelp() {
         chrome.tabs.create({
-            url: 'https://github.com/user/auto-captcha#readme'
+            url: 'https://github.com/zx90316/auto-captcha#readme'
         });
     }
 
