@@ -208,7 +208,7 @@ const ApiHandler = {
         const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
         let endpoint = config.endpoint.replace(/\/$/, '');
         if (!endpoint.includes('/api/')) {
-            endpoint = `${endpoint}/api/generate`;
+            endpoint = `${endpoint}/api/chat`;
         }
 
         const response = await fetch(endpoint, {
@@ -216,8 +216,13 @@ const ApiHandler = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 model: config.model,
-                prompt: OCR_PROMPT,
-                images: [base64Data],
+                messages: [
+                    {
+                        role: 'user',
+                        content: `${OCR_PROMPT} [img-0]`,
+                        images: [base64Data],
+                    },
+                ],
                 stream: false
             })
         });
@@ -227,7 +232,7 @@ const ApiHandler = {
         }
 
         const data = await response.json();
-        return data.response;
+        return data.message.content;
     },
 
     async callLMStudio(imageBase64, config) {

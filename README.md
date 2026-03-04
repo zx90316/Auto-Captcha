@@ -47,12 +47,55 @@
 #### Ollama
 1. 安裝 [Ollama](https://ollama.ai/)
 2. 下載支援視覺的模型：`ollama pull glm-ocr:latest`
-3. 設定 CORS 允許擴充功能存取：
+3. 設定 CORS 允許擴充功能存取（擇一方式）：
+
+   **方式 A：永久設定（推薦）**
+
+   透過系統環境變數永久生效，設定後 Ollama 每次啟動都會自動允許瀏覽器擴充功能存取：
+
+   - **Windows**
+     1. 開啟「系統」→「進階系統設定」→「環境變數」
+     2. 在「使用者變數」或「系統變數」中新增：
+        - 變數名稱：`OLLAMA_ORIGINS`
+        - 變數值：`chrome-extension://*`
+     3. 確定後重新啟動 Ollama
+
+     或透過 PowerShell 一行設定：
+     ```powershell
+     [Environment]::SetEnvironmentVariable("OLLAMA_ORIGINS", "chrome-extension://*", "User")
+     ```
+     設定完成後需重新啟動 Ollama 才會生效。
+
+   - **macOS**
+     ```bash
+     launchctl setenv OLLAMA_ORIGINS "chrome-extension://*"
+     ```
+     設定後重新啟動 Ollama。
+
+   - **Linux (systemd)**
+     ```bash
+     sudo systemctl edit ollama
+     ```
+     在 `[Service]` 區塊中加入：
+     ```ini
+     [Service]
+     Environment="OLLAMA_ORIGINS=chrome-extension://*"
+     ```
+     儲存後重新載入並重啟：
+     ```bash
+     sudo systemctl daemon-reload
+     sudo systemctl restart ollama
+     ```
+
+   **方式 B：臨時設定（僅當次有效）**
    ```powershell
    $env:OLLAMA_ORIGINS="chrome-extension://*"
    ollama serve
    ```
+
 4. 預設端點：`http://localhost:11434`
+
+> **實測環境**：Intel Core i7-14700 / 32GB RAM搭配 `glm-ocr:latest` 模型，驗證碼辨識功能運作正常。
 
 #### LM Studio
 1. 安裝 [LM Studio](https://lmstudio.ai/)
