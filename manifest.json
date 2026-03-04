@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Auto-Captcha",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "自動偵測並識別網頁驗證碼，支援多種 AI API (ChatGPT、Gemini、Ollama、LM Studio)",
   "icons": {
     "16": "icons/icon16.png",
